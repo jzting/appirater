@@ -37,6 +37,7 @@
 #import "Appirater.h"
 #import <SystemConfiguration/SCNetworkReachability.h>
 #include <netinet/in.h>
+#import "Flurry.h"
 
 NSString *const kAppiraterFirstUseDate				= @"kAppiraterFirstUseDate";
 NSString *const kAppiraterUseCount					= @"kAppiraterUseCount";
@@ -364,6 +365,7 @@ static id<AppiraterDelegate> _delegate;
 #if TARGET_IPHONE_SIMULATOR
 	NSLog(@"APPIRATER NOTE: iTunes App Store is not supported on the iOS simulator. Unable to open App Store page.");
 #else
+    [Flurry logEvent:@"rateApp"];
 	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
 
 	// this URL Scheme should work in the iOS 6 App Store in addition to older stores
